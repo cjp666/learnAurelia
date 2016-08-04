@@ -11,10 +11,14 @@
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.13.0",
+    "jspm": "^0.16.42",
     "lite-server": "^2.2.2"
   },
   "jspm": {
-    "dependencies": {},
+    "dependencies": {
+      "aurelia-bootstrapper": "npm:aurelia-bootstrapper@^1.0.0",
+      "aurelia-framework": "npm:aurelia-framework@^1.0.1"
+    },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
