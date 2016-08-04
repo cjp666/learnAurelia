@@ -1,0 +1,16 @@
+{
+  "name": "learnAurelia",
+  "version": "0.0.1",
+  "description": "",
+  "authors": [
+    "Chris Podmore"
+  ],
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "lite-server": "^2.2.2"
+  }
+}
