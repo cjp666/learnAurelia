@@ -29,4 +29,11 @@ export class MovieData {
                 return null;
             });
     }
+
+    save(movie) {
+        console.log('Saving movie ' + movie);
+        return new Promise(function(resolve, reject) {
+            resolve(movie);
+        });
+    }
 }

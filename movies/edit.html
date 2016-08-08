@@ -1,0 +1,31 @@
+<template>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>Editing ${movie.title}</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <label for="movietitle" class="col-sm2 control-label">Title</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="title" value.bind="movie.title" id="movietitle">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <label for="releaseyear" class="col-sm2 control-label">Release Year</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="title" value.bind="movie.releaseYear" id="releaseyear">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" click.trigger="save()">Save</button>
+            </div>
+        </div>
+    </div>
+</template>
