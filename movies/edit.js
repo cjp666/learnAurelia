@@ -1,12 +1,26 @@
-import {inject} from 'aurelia-framework';
+import {inject, NewInstance} from 'aurelia-dependency-injection';
 import {Router} from 'aurelia-router';
 import {MovieData} from './movieData';
+import {ValidationController} from 'aurelia-validation';
+import {ValidationRules} from 'aurelia-validatejs';
+import {validateTrigger} from 'aurelia-validation';
 
-@inject(MovieData, Router)
+@inject(MovieData, Router, NewInstance.of(ValidationController), ValidationRules)
 export class Edit {
-    constructor(movieData, router) {
+    constructor(movieData, router, validationController) {
         this.data = movieData;
         this.router = router;
+
+        this.validationController = validationController;
+        this.validationController.validateTrigger = validateTrigger.manual;
+
+        this.validationRules = ValidationRules
+            .ensure('movie.title')
+            .required()
+            .length({ minimum: 3, maximum: 100 })
+            .ensure('movie.releaseYear')
+            .required()
+            .on(this.validationController);
     }
 
     activate(params) {
@@ -16,6 +30,9 @@ export class Edit {
     }
 
     save() {
+        let errors = this.validationController.validate();
+        console.log(errors);
+
         this.data
             .save(this.movie)
             .then(movie => {
