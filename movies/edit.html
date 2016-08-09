@@ -1,4 +1,6 @@
 <template>
+    <require from="validation-summary.html"></require>
+
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -7,21 +9,24 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" validate.bind="validation" submit.trigger="save()">
+                <form class="form-horizontal" submit.delegate="save()" validation-renderer="bootstrap-form" validation-errors.bind="errors">
+                    <validation-summary errors.bind="errors" autofocus.bind="controller.validateTrigger === 'manual'">
+                    </validation-summary>
+
                     <div class="form-group">
                         <div class="col-sm-2">
                             <label for="movietitle" class="col-sm2 control-label">Title</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="title" value.bind="movie.title" id="movietitle">
+                            <input type="text" class="form-control" placeholder="title" value.bind="movie.title & validate" id="movietitle">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-2">
                             <label for="releaseyear" class="col-sm2 control-label">Release Year</label>
                         </div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="title" value.bind="movie.releaseYear" id="releaseyear">
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" placeholder="release year" value.bind="movie.releaseYear & validate" id="releaseyear">
                         </div>
                     </div>
 

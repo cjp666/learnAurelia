@@ -1,22 +1,18 @@
-// import {inject} from 'aurelia-dependency-injection';
+import {inject, NewInstance} from 'aurelia-dependency-injection';
 import {Router} from 'aurelia-router';
-import {Validation} from 'aurelia-validation';
 import {MovieData} from './movieData';
+import {ValidationController, validateTrigger} from 'aurelia-validation';
+import {required, email, ValidationRules} from 'aurelia-validatejs';
 
-@inject(MovieData, Router, Validation)
+@inject(MovieData, Router, NewInstance.of(ValidationController))
 export class Edit {
-    constructor(movieData, router, validation) {
+    constructor(movieData, router, controller) {
         this.data = movieData;
 
         this.router = router;
 
-        this.validation = validation;
-        //     .ensure('movie.title')
-        //     .required()
-        //     .length({ minimum: 3, maximum: 100 })
-        //     .ensure('movie.releaseYear')
-        //     .required()
-        //     .on(this);
+        this.controller = controller;
+        this.controller.validateTrigger = validateTrigger.manual;
     }
 
     activate(params) {
@@ -26,14 +22,19 @@ export class Edit {
     }
 
     save() {
-        // let errors = this.validationController.validate();
-        // console.log(errors);
+        let errors = this.controller.validate();
+        console.log(errors);
 
-        this.data
-            .save(this.movie)
-            .then(movie => {
-                let url = this.router.generate('details', { id: movie.id });
-                this.router.navigate(url);
-            });
+        // this.data
+        //     .save(this.movie)
+        //     .then(movie => {
+        //         let url = this.router.generate('details', { id: movie.id });
+        //         this.router.navigate(url);
+        //     });
     }
 }
+
+ValidationRules
+    .ensure('movie.title').required()
+    .ensure('movie.releaseYear').required()
+    .on(Edit);

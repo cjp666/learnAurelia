@@ -3,3 +3,10 @@
     margin-left: 5px;
     margin-top: 5px;
 }
+
+.registration-form {
+    display: block;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
