@@ -10,7 +10,10 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "aurelia-bundler": "^0.4.0",
+    "aurelia-cli": "^0.17.0",
     "browser-sync": "^2.13.0",
+    "gulp": "^3.9.1",
     "jspm": "^0.16.42",
     "lite-server": "^2.2.2"
   },
