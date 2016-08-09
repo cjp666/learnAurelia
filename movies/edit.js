@@ -6,35 +6,47 @@ import {required, email, ValidationRules} from 'aurelia-validatejs';
 
 @inject(MovieData, Router, NewInstance.of(ValidationController))
 export class Edit {
+
     constructor(movieData, router, controller) {
         this.data = movieData;
 
         this.router = router;
 
+        this.movieTitle = '';
+        this.movieReleaseYear = '';
+
         this.controller = controller;
-        this.controller.validateTrigger = validateTrigger.manual;
+        this.controller.validateTrigger = validateTrigger.change;
     }
 
     activate(params) {
         return this.data
             .getById(params.id)
-            .then(movie => this.movie = movie);
+            .then(movie => {
+                this.movie = movie;
+                this.movieTitle = movie.title;
+                this.movieReleaseYear = movie.releaseYear;
+            });
     }
 
     save() {
         let errors = this.controller.validate();
-        console.log(errors);
+        if (errors.length > 0) {
+            return;
+        }
 
-        // this.data
-        //     .save(this.movie)
-        //     .then(movie => {
-        //         let url = this.router.generate('details', { id: movie.id });
-        //         this.router.navigate(url);
-        //     });
+        this.movie.title = this.movieTitle;
+        this.movie.releaseYear = this.movieReleaseYear;
+        this.data
+            .save(this.movie)
+            .then(movie => {
+                let url = this.router.generate('details', { id: movie.id });
+                this.router.navigate(url);
+            });
     }
 }
 
 ValidationRules
-    .ensure('movie.title').required()
-    .ensure('movie.releaseYear').required()
+    .ensure('movieTitle').required()
+    .ensure('movieReleaseYear').required()
     .on(Edit);
