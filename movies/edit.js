@@ -2,7 +2,7 @@ import {inject, NewInstance} from 'aurelia-dependency-injection';
 import {Router} from 'aurelia-router';
 import {MovieData} from './movieData';
 import {ValidationController, validateTrigger} from 'aurelia-validation';
-import {required, email, ValidationRules} from 'aurelia-validatejs';
+import {required, ValidationRules} from 'aurelia-validatejs';
 
 @inject(MovieData, Router, NewInstance.of(ValidationController))
 export class Edit {
